@@ -1,0 +1,715 @@
+﻿/* ============================================
+   TRACK APPLICATION - COMPLETE CSS FILE
+   ============================================ */
+
+/* ============================================
+   BACK BUTTON - SHARED
+   ============================================ */
+
+.back-button-container {
+    position: fixed;
+    top: 70px;
+    left: 20px;
+    z-index: 1040;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #495057;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+    .back-btn:hover {
+        background: rgba(248, 249, 250, 0.98);
+        color: #495057;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+/* ============================================
+   TRACK INDEX PAGE - PROFESSIONAL STYLING
+   ============================================ */
+
+.track-index-page {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+    padding: 40px 15px;
+}
+
+.track-index-header {
+    text-align: center;
+    margin-bottom: 35px;
+    padding: 30px 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #17a2b8;
+}
+
+.header-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    font-size: 2rem;
+}
+
+.track-index-header h2 {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.track-index-header .subtitle {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Search Form Card */
+.search-form-card {
+    background: white;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    border-top: 4px solid #17a2b8;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.optional-text {
+    color: #6c757d;
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin-left: 8px;
+}
+
+.search-input {
+    height: 50px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fafbfc;
+}
+
+    .search-input:focus {
+        border-color: #17a2b8;
+        box-shadow: 0 0 0 0.25rem rgba(23, 162, 184, 0.15);
+        background: white;
+        outline: 0;
+    }
+
+.form-actions {
+    display: grid;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-search {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    border: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+    .btn-search:hover {
+        background: linear-gradient(135deg, #138496 0%, #117a8b 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(23, 162, 184, 0.3);
+    }
+
+.btn-clear {
+    border: 2px solid #6c757d;
+    color: #6c757d;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 500;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+    .btn-clear:hover {
+        background: #6c757d;
+        color: white;
+        transform: translateY(-1px);
+    }
+
+/* Information Cards */
+.info-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #17a2b8;
+    height: 100%;
+    transition: transform 0.2s ease;
+}
+
+    .info-card:hover {
+        transform: translateY(-3px);
+    }
+
+.info-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #495057;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+    .info-header i {
+        color: #17a2b8;
+        margin-right: 10px;
+        font-size: 1.2rem;
+    }
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.type-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.type-badge {
+    min-width: 45px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-align: center;
+    color: white;
+}
+
+    .type-badge.gut {
+        background: #28a745;
+    }
+
+    .type-badge.ofc {
+        background: #17a2b8;
+    }
+
+    .type-badge.rpf {
+        background: #ffc107;
+        color: #000;
+    }
+
+    .type-badge.tfl {
+        background: #dc3545;
+    }
+
+    .type-badge.ttr {
+        background: #6f42c1;
+    }
+
+    .type-badge.dep {
+        background: #fd7e14;
+    }
+
+.type-text {
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+    .status-dot.submitted {
+        background: #ffc107;
+    }
+
+    .status-dot.in-progress {
+        background: #17a2b8;
+    }
+
+    .status-dot.under-review {
+        background: #6f42c1;
+    }
+
+    .status-dot.completed {
+        background: #28a745;
+    }
+
+    .status-dot.rejected {
+        background: #dc3545;
+    }
+
+.status-text {
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   RESULT PAGE - BOOTSTRAP CARD DESIGN
+   ============================================ */
+
+.track-result-page {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+/* Main Card Styling */
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-header {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: white;
+    border-bottom: none !important;
+}
+
+.complaint-number {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.status-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* Status Badge Colors */
+.status-submitted {
+    background: #ffc107;
+    color: #000;
+}
+
+.status-in-progress {
+    background: #fd7e14;
+    color: white;
+}
+
+.status-under-review {
+    background: #6f42c1;
+    color: white;
+}
+
+.status-approved,
+.status-completed {
+    background: #28a745;
+    color: white;
+}
+
+.status-rejected {
+    background: #dc3545;
+    color: white;
+}
+
+/* Detail Sections */
+.detail-section {
+    height: 100%;
+}
+
+.section-header {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #17a2b8;
+    font-size: 1.1rem;
+}
+
+.detail-table .table {
+    margin-bottom: 0;
+}
+
+.detail-label {
+    width: 35%;
+    color: #6c757d;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none !important;
+    padding: 8px 0;
+}
+
+.detail-value {
+    color: #495057;
+    font-weight: 500;
+    border: none !important;
+    padding: 8px 0;
+}
+
+/* Priority Colors */
+.priority-high {
+    color: #dc3545;
+    font-weight: 700;
+}
+
+.priority-medium {
+    color: #fd7e14;
+    font-weight: 700;
+}
+
+.priority-low {
+    color: #28a745;
+    font-weight: 700;
+}
+
+/* Progress Section */
+.progress-section {
+    padding: 30px 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+}
+
+.progress {
+    border-radius: 15px !important;
+    background-color: #e9ecef !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    border-radius: 15px !important;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 25px;
+    transition: width 1s ease-in-out;
+}
+
+.progress-labels {
+    padding: 0 10px;
+    font-size: 0.85rem;
+}
+
+    .progress-labels i {
+        margin-right: 5px;
+    }
+
+/* Card Footer */
+.card-footer {
+    padding: 25px !important;
+}
+
+.btn {
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    border: none;
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #138496 0%, #117a8b 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(23, 162, 184, 0.3);
+    }
+
+.btn-outline-secondary {
+    border: 2px solid #17a2b8;
+    color: #17a2b8;
+}
+
+    .btn-outline-secondary:hover {
+        background: #17a2b8;
+        border-color: #17a2b8;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+/* ============================================
+   MOBILE RESPONSIVENESS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .back-button-container {
+        top: 60px;
+        left: 15px;
+    }
+
+    /* Track Index Mobile */
+    .track-index-page {
+        padding: 20px 10px;
+    }
+
+    .track-index-header {
+        padding: 10px 17px;
+        margin-bottom: 20px;
+    }
+
+    .header-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .track-index-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .search-form-card {
+        padding: 25px 20px;
+    }
+
+    .search-input {
+        height: 45px;
+        font-size: 0.95rem;
+    }
+
+    .info-card {
+        padding: 18px;
+    }
+
+    /* Result Page Mobile */
+    .track-result-page {
+        padding: 10px;
+    }
+
+    .card-header {
+        padding: 20px 15px !important;
+    }
+
+    .complaint-info,
+    .status-info {
+        margin-bottom: 10px;
+    }
+
+    .complaint-number {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+
+    .status-badge {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .card-body {
+        padding: 20px 15px !important;
+    }
+
+    .section-header {
+        font-size: 1rem;
+    }
+
+    .detail-label {
+        width: 40%;
+        font-size: 0.85rem;
+    }
+
+    .detail-value {
+        font-size: 0.9rem;
+    }
+
+    .progress-section {
+        padding: 20px 15px;
+        margin-top: 20px !important;
+    }
+
+    .progress {
+        height: 20px !important;
+    }
+
+    .progress-bar {
+        line-height: 20px;
+        font-size: 0.9rem;
+    }
+
+    .progress-labels {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .card-footer {
+        padding: 20px 15px !important;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Track Index Small Mobile */
+    .form-actions {
+        gap: 12px;
+    }
+
+    .btn-search,
+    .btn-clear {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    .info-content {
+        gap: 10px;
+    }
+
+    .type-text,
+    .status-text {
+        font-size: 0.85rem;
+    }
+
+    /* Result Page Small Mobile */
+    .complaint-number {
+        font-size: 0.9rem;
+    }
+
+    .section-header {
+        font-size: 0.95rem;
+    }
+
+    .detail-label {
+        width: 45%;
+        font-size: 0.8rem;
+    }
+
+    .detail-value {
+        font-size: 0.85rem;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+    .back-button-container,
+    .card-footer {
+        display: none !important;
+    }
+
+    .track-result-page {
+        background: white !important;
+        padding: 0 !important;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 2px solid #333 !important;
+    }
+
+    .card-header {
+        background: #17a2b8 !important;
+        -webkit-print-color-adjust: exact;
+        color: white !important;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.text-success {
+    color: #28a745 !important;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+.text-warning {
+    color: #ffc107 !important;
+}
+
+.text-info {
+    color: #0d6efd !important;
+}
+
+.text-primary {
+    color: #007bff !important;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.border-0 {
+    border: none !important;
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

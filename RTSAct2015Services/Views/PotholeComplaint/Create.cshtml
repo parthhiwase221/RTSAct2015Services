@@ -1,0 +1,339 @@
+﻿@{
+    ViewData["Title"] = "खड्डे भरणे - तक्रार";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-road me-2"></i>खड्डे भरणे तक्रार</h4>
+                    <small>Pothole Repair Complaint Form</small>
+                </div>
+                <div class="card-body">
+                    <form id="potholecomplaint_form">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Personal Details -->
+                        <h5 class="mb-3 text-primary"><i class="fas fa-user me-2"></i>Applicant Details (अर्जदाराचा तपशील)</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Title (शीर्षक)<span class="text-danger">*</span></label>
+                                <select name="Title" class="form-select" required>
+                                    <option value="">Select</option>
+                                    <option value="श्री.">श्री.</option>
+                                    <option value="श्रीमती.">श्रीमती.</option>
+                                    <option value="कुमारी.">कुमारी.</option>
+                                    <option value="डॉ.">डॉ.</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">First Name (पहिले नाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="FirstName" class="form-control" required maxlength="40">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Middle Name (मधले नाव)</label>
+                                <input type="text" name="MiddleName" class="form-control" maxlength="40">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Last Name (आडनाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="LastName" class="form-control" required maxlength="40">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Mobile No. (मोबाईल क्र.) <span class="text-danger">*</span></label>
+                                <input type="tel" name="Mobile" class="form-control" required maxlength="10" pattern="[6-9][0-9]{9}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Email (ईमेल)</label>
+                                <input type="email" name="Email" class="form-control" maxlength="80">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Pin Code (पिन कोड)<span class="text-danger">*</span></label>
+                                <input type="text" name="PinCode" class="form-control" required maxlength="6" pattern="[1-9][0-9]{5}">
+                            </div>
+                        </div>
+
+                        <!-- Address Details -->
+                        <h5 class="mb-3 text-primary"><i class="fas fa-map-marker-alt me-2"></i>पत्ता तपशील</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Name of Street (रस्त्याचे नाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="Street" class="form-control" required maxlength="60">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Name of Area (क्षेत्राचे नाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="Area" class="form-control" required maxlength="60">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Name of City (शहराचे नाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="City" class="form-control" required maxlength="40">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Near By Landmark (घराजवळची खूण) <span class="text-danger">*</span></label>
+                                <input type="text" name="Landmark" class="form-control" required maxlength="60">
+                            </div>
+                        </div>
+
+                        <!-- Map Section -->
+                        <h5 class="mb-3 text-primary"><i class="fas fa-map-marker-alt me-2"></i>Location (स्थान)</h5>
+                        <div class="mb-3">
+                            <div id="map" style="height: 300px; width: 100%; border-radius: 8px; border: 2px solid #dee2e6;"></div>
+                            <small class="form-text text-muted">Click on the map or drag the marker to set pothole location</small>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-5">
+                                <label class="form-label">अक्षांश (Latitude) <span class="text-danger">*</span></label>
+                                <input id="Latitude" name="Latitude" type="number" step="any" class="form-control" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-label">रेखांश (Longitude) <span class="text-danger">*</span></label>
+                                <input id="Longitude" name="Longitude" type="number" step="any" class="form-control" required>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">&nbsp;</label>
+                                <button type="button" id="getLocationBtn" class="btn btn-outline-primary form-control">
+                                    <i class="fas fa-location-arrow me-1"></i>Get Location
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Pothole Specific Details -->
+                        <h5 class="mb-3 text-primary"><i class="fas fa-receipt me-2"></i> खड्ड्याचा तपशील</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-2">
+                                <label class="form-label">PotholeCount(खड्ड्यांची संख्या) <span class="text-danger">*</span></label>
+                                <input type="text" name="PotholeCount" class="form-control" inputmode="numeric" maxlength="3" required oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-label">Road Name(रस्त्याचे नाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="RoadName" class="form-control" required maxlength="100">
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-label">Pothole Size(खड्ड्याचा आकार) <span class="text-danger">*</span></label>
+                                <select name="PotholeSize" class="form-select" required>
+                                    <option value="">Select</option>
+                                    <option value="Small">Small</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Large">Large</option>       
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Traffic Impact(वाहतूक प्रभाव)<span class="text-danger">*</span></label>
+                                <select name="TrafficImpact" class="form-select" required>
+                                    <option value="">Select</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Road Type <span class="text-danger">*</span></label>
+                                <select name="RoadType" class="form-select" required>
+                                    <option value="">Select</option>
+                                    <option value="Main Road">Main Road</option>
+                                    <option value="Sub Road">Sub Road</option>
+                                    <option value="Internal Road">Internal Road</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Document Upload -->
+                        <h5 class="mb-3 text-primary"><i class="fas fa-cloud-upload-alt me-2"></i>Document Upload (कागदपत्रे अपलोड)</h5>
+                        <div class="mb-4">
+                            <label class="form-label">Upload Photo/Document</label>
+                            <input type="file" name="DocumentFile" class="form-control" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                            <small class="form-text text-muted">Upload photo of pothole or supporting documents (PDF, JPG, PNG, DOC, DOCX - Max 10MB)</small>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Submit Complaint
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
+    <script>
+        $(document).ready(function() {
+            console.log("OFC Form JavaScript loaded");
+
+            // Initialize Leaflet Map
+            var latInput = document.getElementById('Latitude');
+            var lngInput = document.getElementById('Longitude');
+            var defaultCenter = [18.5204, 73.8567]; // Pune coordinates
+
+            var map = L.map('map').setView(defaultCenter, 12);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            var marker = L.marker(defaultCenter, {
+                draggable: true,
+                title: 'Drag me to set installation location'
+            }).addTo(map);
+
+            function updateInputs(latlng) {
+                latInput.value = latlng.lat.toFixed(6);
+                lngInput.value = latlng.lng.toFixed(6);
+            }
+
+            // Update inputs when marker is dragged
+            marker.on('dragend', function(e) {
+                updateInputs(e.target.getLatLng());
+            });
+
+            // Update marker when map is clicked
+            map.on('click', function(e) {
+                marker.setLatLng(e.latlng);
+                updateInputs(e.latlng);
+            });
+
+            // Initialize inputs with default values
+            updateInputs(marker.getLatLng());
+
+            // Update marker when inputs are manually changed
+            function updateMarkerFromInputs() {
+                var lat = parseFloat(latInput.value);
+                var lng = parseFloat(lngInput.value);
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    var newLatLng = L.latLng(lat, lng);
+                    marker.setLatLng(newLatLng);
+                    map.panTo(newLatLng);
+                }
+            }
+
+            latInput.addEventListener('change', updateMarkerFromInputs);
+            lngInput.addEventListener('change', updateMarkerFromInputs);
+
+            // Get current location
+            $('#getLocationBtn').on('click', function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        var newLatLng = L.latLng(lat, lng);
+                        marker.setLatLng(newLatLng);
+                        map.setView(newLatLng, 15);
+                        updateInputs(newLatLng);
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Location Updated!',
+                            text: 'आपला वर्तमान स्थान सेट झाला आहे',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }, function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Location Error',
+                            text: 'स्थान मिळू शकले नाही. कृपया मॅपवर क्लिक करून सेट करा'
+                        });
+                    });
+                }
+            });
+
+            // Form submission
+            $('#potholecomplaint_form').on('submit', function(e) {
+                e.preventDefault();
+
+                const form = this;
+                const submitBtn = $(form).find('button[type="submit"]');
+                const originalText = submitBtn.html();
+
+                // Show loading
+                submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Submitting...').prop('disabled', true);
+
+                const formData = new FormData(form);
+
+                $.ajax({
+                    url: '@Url.Action("Create", "PotholeComplaint")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Complaint Submitted Successfully!',
+                                html: `
+                                    <div class="text-center">
+                                        <h5 class="text-success">${response.message}</h5>
+                                        <hr>
+                                        <p><strong>Complaint ID:</strong> <span class="text-primary">${response.data.applicationId}</span></p>
+                                        <small class="text-muted">Please save this ID for future reference</small>
+                                    </div>
+                                `,
+                                confirmButtonText: 'Continue',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Reset form and map
+                                    form.reset();
+                                    marker.setLatLng(defaultCenter);
+                                    map.setView(defaultCenter, 13);
+                                    updateInputs(marker.getLatLng());
+                                    // Redirect to home page
+                                    window.location.href = '@Url.Action("Index", "Home")';
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validation Error',
+                                text: response.message || 'Please check your input and try again.',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', xhr.responseText);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Server Error',
+                            text: 'An error occurred while submitting your complaint. Please try again later.',
+                            confirmButtonText: 'OK'
+                        });
+                    },
+                    complete: function() {
+                        // Restore button
+                        submitBtn.html(originalText).prop('disabled', false);
+                    }
+                });
+            });
+
+            // Input validation
+            $('input[pattern]').on('blur', function() {
+                const pattern = new RegExp($(this).attr('pattern'));
+                const value = $(this).val();
+
+                if (value && !pattern.test(value)) {
+                    $(this).addClass('is-invalid');
+                } else {
+                    $(this).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+}

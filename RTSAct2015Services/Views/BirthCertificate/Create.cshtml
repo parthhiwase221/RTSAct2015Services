@@ -1,0 +1,514 @@
+﻿@{
+    ViewData["Title"] = "जन्म प्रमाणपत्र - Birth Certificate";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-baby me-2"></i>जन्म प्रमाणपत्राकरिता अर्ज
+                        <small class="d-block">Birth Certificate Application Form</small>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form id="birthcertificate_form" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Child Details -->
+                        <h5 class="mb-3 text-info">
+                            <i class="fas fa-child me-2"></i>बालकाचे तपशील (Child Details)
+                        </h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Child's Full Name</span>
+                                    <span class="marathi">(बालकाचे पूर्ण नाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="ChildName" class="form-control" required maxlength="100">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Gender</span>
+                                    <span class="marathi">(लिंग)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="Gender" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Male">Male (पुरुष)</option>
+                                    <option value="Female">Female (स्त्री)</option>
+                                    <option value="Other">Other (इतर)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Date of Birth</span>
+                                    <span class="marathi">(जन्म तारीख)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="date" name="DateOfBirth" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Place of Birth</span>
+                                    <span class="marathi">(जन्म स्थान)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="PlaceOfBirth" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Hospital">Hospital (रुग्णालय)</option>
+                                    <option value="Home">Home (घर)</option>
+                                    <option value="Other">Other (इतर)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Hospital/Place Name</span>
+                                    <span class="marathi">(रुग्णालय/स्थानाचे नाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="HospitalName" class="form-control" required maxlength="100">
+                            </div>
+                        </div>
+
+                        <!-- Parent Details -->
+                        <h5 class="mb-3 text-info">
+                            <i class="fas fa-users me-2"></i>पालकांचे तपशील (Parent Details)
+                        </h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Father's Title</span>
+                                    <span class="marathi">(वडिलांचे सौजन्य)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="FatherTitle" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="श्री.">श्री.</option>
+                                    <option value="डॉ.">डॉ.</option>
+                                    <option value="प्रो.">प्रो.</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Father's First Name</span>
+                                    <span class="marathi">(वडिलांचे पहिले नाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="FatherFirstName" class="form-control" required maxlength="50">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Father's Last Name</span>
+                                    <span class="marathi">(वडिलांचे आडनाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="FatherLastName" class="form-control" required maxlength="50">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Mother's Title</span>
+                                    <span class="marathi">(आईचे सौजन्य)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="MotherTitle" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="श्रीमती.">श्रीमती.</option>
+                                    <option value="कुमारी.">कुमारी.</option>
+                                    <option value="डॉ.">डॉ.</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Mother's First Name</span>
+                                    <span class="marathi">(आईचे पहिले नाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="MotherFirstName" class="form-control" required maxlength="50">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Mother's Last Name</span>
+                                    <span class="marathi">(आईचे आडनाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="MotherLastName" class="form-control" required maxlength="50">
+                            </div>
+                        </div>
+
+                        <!-- Applicant Details -->
+                        <h5 class="mb-3 text-info">
+                            <i class="fas fa-user me-2"></i>अर्जदाराचे तपशील (Applicant Details)
+                        </h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-2">
+                                <label class="form-label">
+                                    <span class="english">Title</span>
+                                    <span class="marathi">(सौजन्य)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="Title" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="श्री.">श्री.</option>
+                                    <option value="श्रीमती.">श्रीमती.</option>
+                                    <option value="कुमारी.">कुमारी.</option>
+                                    <option value="डॉ.">डॉ.</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">First Name</span>
+                                    <span class="marathi">(पहिले नाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="FirstName" class="form-control" required maxlength="40">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Middle Name</span>
+                                    <span class="marathi">(मधले नाव)</span>
+                                </label>
+                                <input type="text" name="MiddleName" class="form-control" maxlength="40">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Last Name</span>
+                                    <span class="marathi">(आडनाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="LastName" class="form-control" required maxlength="40">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Relationship with Child</span>
+                                    <span class="marathi">(मुलाशी नाते)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="RelationshipWithChild" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Father">Father (वडील)</option>
+                                    <option value="Mother">Mother (आई)</option>
+                                    <option value="Guardian">Guardian (पालक)</option>
+                                    <option value="Relative">Relative (नातेवाईक)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Mobile No.</span>
+                                    <span class="marathi">(मोबाईल क्र.)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="tel" name="Mobile" class="form-control" required maxlength="10" pattern="[6-9][0-9]{9}">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Pin Code</span>
+                                    <span class="marathi">(पिन कोड)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="PinCode" class="form-control" required maxlength="6" pattern="[1-9][0-9]{5}">
+                            </div>
+                        </div>
+
+                        <!-- Address Details -->
+                        <h5 class="mb-3 text-info">
+                            <i class="fas fa-map-marker-alt me-2"></i>पत्ता तपशील (Address Details)
+                        </h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Street/House No.</span>
+                                    <span class="marathi">(रस्ता/घर क्र.)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="Street" class="form-control" required maxlength="60">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Area/Locality</span>
+                                    <span class="marathi">(भाग/परिसर)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="Area" class="form-control" required maxlength="60">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">City</span>
+                                    <span class="marathi">(शहर)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="City" class="form-control" required maxlength="40" placeholder="Enter City Name">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">District</span>
+                                    <span class="marathi">(जिल्हा)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="District" class="form-control" required maxlength="40" placeholder="Enter District Name">
+                            </div>
+
+                        <!-- Add this after the City/District row in your Birth Certificate form -->
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Landmark (Optional)</span>
+                                    <span class="marathi">(खूणा)</span>
+                                </label>
+                                <input type="text" name="Landmark" class="form-control" maxlength="100">
+                            </div>
+                        </div>
+
+                        <!-- Certificate Requirements -->
+                        <h5 class="mb-3 text-info">
+                            <i class="fas fa-certificate me-2"></i>प्रमाणपत्र आवश्यकता (Certificate Requirements)
+                        </h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Number of Copies Required</span>
+                                    <span class="marathi">(आवश्यक प्रती संख्या)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="NumberOfCopies" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="1">1 Copy</option>
+                                    <option value="2">2 Copies</option>
+                                    <option value="3">3 Copies</option>
+                                    <option value="4">4 Copies</option>
+                                    <option value="5">5 Copies</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Purpose of Certificate</span>
+                                    <span class="marathi">(प्रमाणपत्राचा हेतू)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="Purpose" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="School Admission">School Admission (शाळेत प्रवेश)</option>
+                                    <option value="Passport">Passport (पासपोर्ट)</option>
+                                    <option value="Job Application">Job Application (नोकरीच्या अर्जासाठी)</option>
+                                    <option value="Other">Other (इतर)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Important Notice -->
+                        <div class="alert alert-warning">
+                            <h6 class="alert-heading">
+                                <i class="fas fa-exclamation-triangle me-2"></i>महत्वाची सूचना (Important Notice)
+                            </h6>
+                            <p class="mb-1">
+                                <small>जर तुम्ही बाळाच्या जन्माच्या एक वर्षानंतर अर्ज करत असाल, तर कृपया प्रथम म.न.पा. आरोग्य विभागाशी संपर्क साधा आणि त्यांच्याकडून ना हरकत प्रमाणपत्र घ्या.</small>
+                            </p>
+                            <p class="mb-0">
+                                <small>If you are applying after one year of the child's birth, please contact the Municipal Corporation Health department first and get a no objection certificate from the department.</small>
+                            </p>
+                        </div>
+
+                        <!-- Document Upload -->
+                        <h5 class="mb-3 text-info">
+                            <i class="fas fa-cloud-upload-alt me-2"></i>कागदपत्रे अपलोड (Document Upload)
+                        </h5>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Hospital Discharge Certificate</span>
+                                    <span class="marathi">(रुग्णालयाचे डिस्चार्ज प्रमाणपत्र)</span>
+                                </label>
+                                <input type="file" name="DischargeDocument" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Applicant's ID Proof</span>
+                                    <span class="marathi">(अर्जदाराचा ओळखपत्र)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="file" name="IdProofDocument" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Address Proof</span>
+                                    <span class="marathi">(पत्त्याचा पुरावा)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="file" name="AddressProofDocument" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Additional Documents</span>
+                                    <span class="marathi">(अतिरिक्त कागदपत्रे)</span>
+                                </label>
+                                <input type="file" name="AdditionalDocument" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
+                                <small class="form-text text-muted">
+                                    (NOC from Health Dept if applying after 1 year / 1 वर्षानंतर अर्ज केल्यास आरोग्य विभागाचे NOC)
+                                </small>
+                            </div>
+                        </div>
+
+                        <!-- Hidden fields for Latitude and Longitude -->
+                        <input type="hidden" name="Latitude" value="0">
+                        <input type="hidden" name="Longitude" value="0">
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-info btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                अर्ज सबमिट करा (Submit Application)
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            console.log("Birth Certificate Form loaded");
+
+            // Form submission
+            $('#birthcertificate_form').on('submit', function(e) {
+                e.preventDefault();
+                const form = this;
+                const submitBtn = $(form).find('button[type="submit"]');
+                const originalText = submitBtn.html();
+
+                // Validate required fields before submission
+                let isValid = true;
+                $(form).find('[required]').each(function() {
+                    if (!$(this).val().trim()) {
+                        $(this).addClass('is-invalid');
+                        isValid = false;
+                    } else {
+                        $(this).removeClass('is-invalid');
+                    }
+                });
+
+                if (!isValid) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: 'कृपया सर्व आवश्यक फील्ड भरा.',
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
+
+                // Show loading
+                submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Submitting...').prop('disabled', true);
+
+                const formData = new FormData(form);
+
+                $.ajax({
+                    url: '@Url.Action("Create", "BirthCertificate")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        console.log('Success Response:', response);
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Application Submitted Successfully!',
+                                html: `
+                                    <div class="text-center">
+                                        <h5 class="text-success">${response.message}</h5>
+                                        <hr>
+                                        <p><strong>Application ID:</strong> <span class="text-primary">${response.data.applicationId}</span></p>
+                                        <small class="text-muted">कृपया भविष्यातील संदर्भासाठी हा ID जतन करा</small>
+                                    </div>
+                                `,
+                                confirmButtonText: 'Continue',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = '@Url.Action("Index", "Home")';
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validation Error',
+                                text: response.message || 'कृपया आपला इनपुट तपासा आणि पुन्हा प्रयत्न करा.',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', xhr.responseText);
+                        let errorMessage = 'अर्ज सबमिट करताना त्रुटी झाली. कृपया नंतर पुन्हा प्रयत्न करा.';
+
+                        try {
+                            const errorResponse = JSON.parse(xhr.responseText);
+                            if (errorResponse.message) {
+                                errorMessage = errorResponse.message;
+                            }
+                        } catch (e) {
+                            // Use default error message
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Server Error',
+                            text: errorMessage,
+                            confirmButtonText: 'OK'
+                        });
+                    },
+                    complete: function() {
+                        submitBtn.html(originalText).prop('disabled', false);
+                    }
+                });
+            });
+
+            // Input validation
+            $('input[pattern]').on('blur', function() {
+                const pattern = new RegExp($(this).attr('pattern'));
+                const value = $(this).val();
+                if (value && !pattern.test(value)) {
+                    $(this).addClass('is-invalid');
+                    $(this).after('<div class="invalid-feedback">Please enter a valid format</div>');
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $(this).siblings('.invalid-feedback').remove();
+                }
+            });
+
+            // Remove validation styles when user starts typing
+            $('input, select').on('input change', function() {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+            });
+        });
+    </script>
+}

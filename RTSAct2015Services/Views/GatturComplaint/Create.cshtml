@@ -1,0 +1,480 @@
+﻿@{
+    ViewData["Title"] = "गटार तक्रार";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-tools me-2"></i>गटार तक्रार फॉर्म</h4>
+                    <small>Gutter Repair Complaint</small>
+                </div>
+                <div class="card-body">
+                    <form id="gutterComplaintForm">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Personal Details -->
+                        <h5 class="mb-3 text-primary"><i class="fas fa-user me-2"></i>Applicant Details (अर्जदाराचा तपशील)</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Title (शीर्षक)<span class="text-danger">*</span></label>
+                                <select name="Title" class="form-select" required>
+                                    <option value="">निवडा</option>
+                                    <option value="श्री.">श्री.</option>
+                                    <option value="श्रीमती.">श्रीमती.</option>
+                                    <option value="कुमारी.">कुमारी.</option>
+                                    <option value="डॉ.">डॉ.</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">First Name (पहिले नाव)<span class="text-danger">*</span></label>
+                                <input type="text" name="FirstName" class="form-control" required maxlength="40">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Middle Name (मधले नाव)</label>
+                                <input type="text" name="MiddleName" class="form-control" maxlength="40">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Last Name (आडनाव)<span class="text-danger">*</span></label>
+                                <input type="text" name="LastName" class="form-control" required maxlength="40">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Mobile No. (मोबाईल क्र.) <span class="text-danger">*</span></label>
+                                <input type="tel" name="Mobile" class="form-control" required maxlength="10" pattern="[6-9][0-9]{9}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Email (ईमेल)</label>
+                                <input type="email" name="Email" class="form-control" maxlength="80">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Zone(प्रभाग)<span class="text-danger">*</span></label>
+                                <select name="ZoneType" class="form-select" required>
+                                    <option value="">निवडा</option>
+                                    <option value="प्रभाग क्र. 1">प्रभाग क्र. 1</option>
+                                    <option value="प्रभाग क्र. 2">प्रभाग क्र. 2</option>
+                                    <option value="प्रभाग क्र. 3">प्रभाग क्र. 3</option>
+                                    <option value="प्रभाग क्र. 4">प्रभाग क्र. 4</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Pin Code (पिन कोड) <span class="text-danger">*</span></label>
+                                <input type="text" name="PinCode" class="form-control" required maxlength="6" pattern="[1-9][0-9]{5}">
+                            </div>
+                        </div>
+
+                        <!-- Address Details -->
+                        <h5 class="mb-3 text-primary"><i class="fas fa-map-marker-alt me-2"></i>पत्ता तपशील</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Name of Street (रस्त्याचे नाव)<span class="text-danger">*</span></label>
+                                <input type="text" name="Street" class="form-control" required maxlength="60">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Name of Area (क्षेत्राचे नाव)<span class="text-danger">*</span></label>
+                                <input type="text" name="Area" class="form-control" required maxlength="60">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Name of City (शहराचे नाव)<span class="text-danger">*</span></label>
+                                <input type="text" name="City" class="form-control" required maxlength="40">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <label class="form-label">Near By Landmark (घराजवळची खूण) <span class="text-danger">*</span></label>
+                                <input type="text" name="Landmark" class="form-control" required maxlength="60">
+                            </div>
+                        </div>
+
+                        <!-- Map and Location Section -->
+                        <h5 class="mb-3 text-primary"><i class="fas fa-map-marker-alt me-2"></i>स्थान निवड (Location Selection)</h5>
+                        <div class="mb-3">
+                            <div id="map" style="height: 300px; width: 100%; border-radius: 8px; border: 2px solid #dee2e6;"></div>
+                            <small class="form-text text-muted">नकाशावर क्लिक करा किंवा मार्करला ड्रॅग करा तुमचे स्थान निवडण्यासाठी</small>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-5">
+                                <label class="form-label">अक्षांश (Latitude) <span class="text-danger">*</span></label>
+                                <input type="number" step="any" class="form-control" id="Latitude" name="Latitude" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-label">रेखांश (Longitude) <span class="text-danger">*</span></label>
+                                <input type="number" step="any" class="form-control" id="Longitude" name="Longitude" required>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">&nbsp;</label>
+                                <button type="button" id="getLocationBtn" class="btn btn-outline-primary form-control">
+                                    <i class="fas fa-location-arrow me-1"></i>Get Location
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Document Upload -->
+                        <h5 class="mb-3 text-primary"><i class="fas fa-cloud-upload-alt me-2"></i>Document Upload (कागदपत्रे अपलोड)</h5>
+                        <div class="mb-4">
+                            <label class="form-label">आवश्यक कागदपत्र</label>
+                            <input type="file" name="DocumentFile" class="form-control" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                            <small class="form-text text-muted">PDF, JPG, PNG, DOC, DOCX files up to 10MB</small>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>तक्रार सबमिट करा
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            console.log("Gattur Complaint Form JavaScript loaded");
+
+            // Initialize Leaflet Map
+            var latInput = document.getElementById('Latitude');
+            var lngInput = document.getElementById('Longitude');
+            var defaultCenter = [18.5204, 73.8567]; // Pune coordinates
+
+            var map = L.map('map').setView(defaultCenter, 12);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            var marker = L.marker(defaultCenter, {
+                draggable: true,
+                title: 'Drag me to set complaint location'
+            }).addTo(map);
+
+            function updateInputs(latlng) {
+                latInput.value = latlng.lat.toFixed(6);
+                lngInput.value = latlng.lng.toFixed(6);
+            }
+
+            // Update inputs when marker is dragged
+            marker.on('dragend', function(e) {
+                updateInputs(e.target.getLatLng());
+            });
+
+            // Update marker when map is clicked
+            map.on('click', function(e) {
+                marker.setLatLng(e.latlng);
+                updateInputs(e.latlng);
+            });
+
+            // Initialize inputs with default values
+            updateInputs(marker.getLatLng());
+
+            // Update marker when inputs are manually changed
+            function updateMarkerFromInputs() {
+                var lat = parseFloat(latInput.value);
+                var lng = parseFloat(lngInput.value);
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    var newLatLng = L.latLng(lat, lng);
+                    marker.setLatLng(newLatLng);
+                    map.panTo(newLatLng);
+                }
+            }
+
+            latInput.addEventListener('change', updateMarkerFromInputs);
+            lngInput.addEventListener('change', updateMarkerFromInputs);
+
+            // Get current location
+            $('#getLocationBtn').on('click', function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        var newLatLng = L.latLng(lat, lng);
+                        marker.setLatLng(newLatLng);
+                        map.setView(newLatLng, 15);
+                        updateInputs(newLatLng);
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Location Updated!',
+                            text: 'आपला वर्तमान स्थान सेट झाला आहे',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }, function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Location Error',
+                            text: 'स्थान मिळू शकले नाही. कृपया मॅपवर क्लिक करून सेट करा'
+                        });
+                    });
+                }
+            });
+
+            // File size and type validation
+            $('input[type="file"]').on('change', function() {
+                var file = this.files[0];
+                if (file) {
+                    var maxSize = 10 * 1024 * 1024; // 10MB
+                    if (file.size > maxSize) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File Too Large',
+                            text: 'फाइल साइज 10MB पेक्षा कमी असावा'
+                        });
+                        $(this).val('');
+                        return false;
+                    }
+
+                    var allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/jpg', 'image/png', 'image/bmp'];
+                    if (!allowedTypes.includes(file.type)) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid File Type',
+                            text: 'कृपया फक्त PDF, DOC, DOCX, JPG, PNG किंवा BMP फाइल अपलोड करा'
+                        });
+                        $(this).val('');
+                        return false;
+                    }
+                }
+            });
+
+            // **FIXED FORM SUBMISSION WITH PROPER ERROR HANDLING**
+            $('#gutterComplaintForm').on('submit', function(e) {
+                e.preventDefault();
+                console.log("Form submit event triggered");
+
+                // Custom validation for required fields
+                let isValid = true;
+                let errors = [];
+
+                // Check required text fields
+                const requiredFields = [
+                    { name: 'Title', message: 'Title is required' },
+                    { name: 'FirstName', message: 'First Name is required' },
+                    { name: 'LastName', message: 'Last Name is required' },
+                    { name: 'Mobile', message: 'Mobile is required' },
+                    { name: 'Street', message: 'Street is required' },
+                    { name: 'Area', message: 'Area is required' },
+                    { name: 'City', message: 'City is required' },
+                    { name: 'PinCode', message: 'Pin Code is required' },
+                    { name: 'Landmark', message: 'Landmark is required' },
+                    { name: 'ZoneType', message: 'Zone Type is required' }
+                ];
+
+                requiredFields.forEach(field => {
+                    const element = $(`[name="${field.name}"]`);
+                    const value = element.val();
+
+                    if (!value || (typeof value === 'string' && value.trim() === '')) {
+                        errors.push(field.message);
+                        isValid = false;
+                        element.addClass('is-invalid');
+                        console.log(`Validation failed for field: ${field.name}`);
+                    } else {
+                        element.removeClass('is-invalid');
+                    }
+                });
+
+                // Validate mobile number
+                const mobile = $('input[name="Mobile"]').val();
+                if (mobile && !/^[6-9]\d{9}$/.test(mobile)) {
+                    errors.push('Mobile number must be 10 digits starting with 6-9');
+                    isValid = false;
+                    console.log("Mobile validation failed");
+                }
+
+                // Validate pin code
+                const pinCode = $('input[name="PinCode"]').val();
+                if (pinCode && !/^[1-9]\d{5}$/.test(pinCode)) {
+                    errors.push('Pin code must be 6 digits not starting with 0');
+                    isValid = false;
+                    console.log("Pin code validation failed");
+                }
+
+                if (!isValid) {
+                    console.log("Client-side validation failed:", errors);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        html: '<ul class="text-left">' + errors.map(err => `<li>${err}</li>`).join('') + '</ul>',
+                        confirmButtonText: 'त्रुटी दुरुस्त करा'
+                    });
+                    return;
+                }
+
+                console.log("Client-side validation passed");
+
+                const form = this;
+                const submitBtn = $(form).find('button[type="submit"]');
+                const originalText = submitBtn.html();
+
+                // Show loading state
+                submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>सबमिट करत आहे...').prop('disabled', true);
+
+                // Create FormData
+                const formData = new FormData();
+
+                // Add all form fields
+                $(form).find('input, select, textarea').each(function() {
+                    const $this = $(this);
+                    const name = $this.attr('name');
+                    const type = $this.attr('type');
+
+                    if (name && name !== '__RequestVerificationToken') {
+                        if (type === 'file') {
+                            // Handle file inputs
+                            const file = this.files[0];
+                            if (file) {
+                                formData.append(name, file);
+                                console.log(`Added file: ${name} = ${file.name}`);
+                            }
+                        } else {
+                            // Handle other input types
+                            const value = $this.val() || '';
+                            formData.append(name, value);
+                            console.log(`Added field: ${name} = ${value}`);
+                        }
+                    }
+                });
+
+                // Add anti-forgery token
+                const token = $('input[name="__RequestVerificationToken"]').val();
+                if (token) {
+                    formData.append('__RequestVerificationToken', token);
+                }
+
+                console.log("Sending AJAX request...");
+
+                // **FIXED AJAX REQUEST**
+                $.ajax({
+                    url: '@Url.Action("Create", "GatturComplaint")',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log("AJAX Success Response:", response);
+
+                        if (response.success) {
+                            // **FIXED: Safely get complaint ID with proper fallback**
+                            const complaintId = response.data && response.data.gutComplaintId
+                                ? response.data.gutComplaintId
+                                : (response.data && response.data.applicationId
+                                    ? response.data.applicationId
+                                    : "अनुपलब्ध");
+
+                            console.log("Complaint ID:", complaintId);
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'यशस्वी!',
+                                html: `
+                                    <div class="text-center">
+                                        <h5 class="text-success">${response.message}</h5>
+                                        <hr>
+                                        <p><strong>तक्रार क्रमांक:</strong> <span class="text-primary">${complaintId}</span></p>
+                                        <p><small class="text-muted">कृपया हा आयडी भविष्यातील संदर्भासाठी सेव्ह करा</small></p>
+                                        <div class="alert alert-info mt-3">
+                                            <small><strong>महत्वाचे:</strong> कृपया सर्व नियमांचे पालन करा</small>
+                                        </div>
+                                    </div>
+                                `,
+                                confirmButtonText: 'ठीक आहे',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Reset form
+                                    form.reset();
+                                    marker.setLatLng(defaultCenter);
+                                    map.setView(defaultCenter, 12);
+                                    updateInputs(marker.getLatLng());
+
+                                    // Optionally redirect
+                                    window.location.href = '@Url.Action("Index", "Home")';
+                                }
+                            });
+                        } else {
+                            console.log("Server validation failed:", response);
+                            let errorHtml = '<div class="text-left">';
+                            errorHtml += '<p class="mb-2"><strong>' + (response.message || 'Unknown error') + '</strong></p>';
+
+                            if (response.errors && response.errors.length > 0) {
+                                errorHtml += '<ul class="text-left">';
+                                response.errors.forEach(function(error) {
+                                    errorHtml += '<li>' + error + '</li>';
+                                });
+                                errorHtml += '</ul>';
+                            }
+                            errorHtml += '</div>';
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validation Error',
+                                html: errorHtml,
+                                confirmButtonText: 'त्रुटी दुरुस्त करा',
+                                width: '600px'
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', xhr.responseText, status, error);
+
+                        let errorMessage = 'सर्व्हर एरर आला आहे. कृपया पुन्हा प्रयत्न करा.';
+
+                        try {
+                            const errorResponse = JSON.parse(xhr.responseText);
+                            if (errorResponse.message) {
+                                errorMessage = errorResponse.message;
+                            }
+                            console.log('Parsed error response:', errorResponse);
+                        } catch (e) {
+                            console.log('Could not parse error response');
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Server Error',
+                            text: errorMessage,
+                            confirmButtonText: 'ठीक आहे'
+                        });
+                    },
+                    complete: function() {
+                        console.log("AJAX request completed");
+                        // Restore button state
+                        submitBtn.html(originalText).prop('disabled', false);
+                    }
+                });
+            });
+
+            // Input validation helpers
+            $('input[pattern]').on('blur', function() {
+                const pattern = new RegExp($(this).attr('pattern'));
+                const value = $(this).val();
+
+                if (value && !pattern.test(value)) {
+                    $(this).addClass('is-invalid');
+                } else {
+                    $(this).removeClass('is-invalid');
+                }
+            });
+
+            // Clear validation styling on focus
+            $('input, select').on('focus', function() {
+                $(this).removeClass('is-invalid');
+            });
+        });
+    </script>
+}

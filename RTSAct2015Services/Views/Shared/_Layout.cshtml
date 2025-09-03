@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RTS ACT 2015 Services</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/track.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-city me-2"></i>RTS ACT 2015 Services
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                                Services
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- Infrastructure Services -->
+                                <li>
+                                    <a class="dropdown-item" asp-controller="GatturComplaint" asp-action="Create">
+                                        <i class="fas fa-tools me-2 text-primary"></i>गटार झाकणे दुरुस्ती
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="TreeTrimming" asp-action="Create">
+                                        <i class="fas fa-cut me-2 text-success"></i>झाड छाटणे
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="OFCPermission" asp-action="Create">
+                                        <i class="fas fa-network-wired me-2 text-info"></i>OFC परवानगी
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="PotholeComplaint" asp-action="Create">
+                                        <i class="fas fa-road me-2 text-warning"></i>खड्डे भरणे
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="TreeFelling" asp-action="Create">
+                                        <i class="fas fa-tree me-2 text-danger"></i>झाड तोडणे
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="DepositRefund" asp-action="Create">
+                                        <i class="fas fa-money-bill-wave me-2 text-secondary"></i>ठेव परतावा
+                                    </a>
+                                </li>
+                                <!-- Certificate Services -->
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="dropdown-header">प्रमाणपत्र सेवा (Certificate Services)</li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="BirthCertificate" asp-action="Create">
+                                        <i class="fas fa-baby me-2 text-info"></i>जन्म प्रमाणपत्र
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="DeathCertificate" asp-action="Create">
+                                        <i class="fas fa-file-medical me-2 text-secondary"></i>मृत्यू प्रमाणपत्र
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="MarriageCertificate" asp-action="Create">
+                                        <i class="fas fa-file-contract me-2 text-primary"></i>लग्न प्रमाणपत्र
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- Track Application Button -->
+                    <div class="d-flex align-items-center">
+                        <a class="btn btn-outline-primary me-2 track-btn" asp-controller="Track" asp-action="Index">
+                            <i class="fas fa-search me-1"></i>
+                            <span class="track-text">Track Application</span>
+                            <small class="d-block marathi-small">तक्रारीचा मागोवा</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - RTS ACT 2015 Services - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/track.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

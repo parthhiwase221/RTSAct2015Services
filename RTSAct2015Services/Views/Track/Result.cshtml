@@ -1,0 +1,214 @@
+﻿@model RTSAct2015Services.Models.DTOs.TrackApplicationResponseDto
+
+@{
+    ViewData["Title"] = "Application Status - तक्रारीची स्थिती";
+
+    // Dynamic progress calculation
+    var progressSteps = new Dictionary<string, int>
+    {
+        { "Submitted", 25 },
+        { "In Progress", 50 },
+        { "Under Review", 75 },
+        { "Approved", 100 },
+        { "Completed", 100 },
+        { "Rejected", 25 }
+    };
+
+    var progressPercentage = progressSteps.ContainsKey(Model.Status) ? progressSteps[Model.Status] : 25;
+    var isRejected = Model.Status.Equals("Rejected", StringComparison.OrdinalIgnoreCase);
+    var isCompleted = Model.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase) || Model.Status.Equals("Approved", StringComparison.OrdinalIgnoreCase);
+}
+
+<!-- Back Button -->
+<div class="back-button-container">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-light back-btn">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+</div>
+
+<div class="track-result-page">
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-10">
+
+                <!-- Main Tracking Card -->
+                <div class="card shadow border-0">
+
+                    <!-- Card Header -->
+                    <div class="card-header border-0 py-3">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="complaint-info">
+                                <span class="complaint-number"># @Model.ComplaintNumber</span>
+                            </div>
+                            <div class="status-info">
+                                <span class="status-badge status-@Model.Status.ToLower().Replace(" ", "-")">
+                                    @Model.Status.ToUpper()
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body p-4">
+                        <!-- Two Column Layout -->
+                        <div class="row g-4">
+                            <!-- Left Column - Application Details -->
+                            <div class="col-md-6">
+                                <div class="detail-section">
+                                    <h5 class="section-header">
+                                        <i class="fas fa-file-alt me-2"></i>
+                                        Application Details
+                                        <small class="text-muted ms-2">तक्रारीचे तपशील</small>
+                                    </h5>
+                                    <div class="detail-table">
+                                        <table class="table table-borderless table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="detail-label">Type:</th>
+                                                    <td class="detail-value">@Model.FormName</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="detail-label">Priority:</th>
+                                                    <td class="detail-value priority-@Model.Priority.ToLower()">
+                                                        @Model.Priority (@Model.PriorityInMarathi)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="detail-label">Submitted:</th>
+                                                    <td class="detail-value">@Model.CreatedDate.ToString("dd MMM yyyy")</td>
+                                                </tr>
+                                                @if (Model.UpdatedDate.HasValue)
+                                                {
+                                                    <tr>
+                                                        <th class="detail-label">Updated:</th>
+                                                        <td class="detail-value">@Model.UpdatedDate.Value.ToString("dd MMM yyyy")</td>
+                                                    </tr>
+                                                }
+                                                @if (!string.IsNullOrEmpty(Model.AssignedTo))
+                                                {
+                                                    <tr>
+                                                        <th class="detail-label">Officer:</th>
+                                                        <td class="detail-value">@Model.AssignedTo</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column - Applicant Details -->
+                            <div class="col-md-6">
+                                <div class="detail-section">
+                                    <h5 class="section-header">
+                                        <i class="fas fa-user me-2"></i>
+                                        Applicant Details
+                                        <small class="text-muted ms-2">अर्जदाराचे तपशील</small>
+                                    </h5>
+                                    <div class="detail-table">
+                                        <table class="table table-borderless table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="detail-label">Name:</th>
+                                                    <td class="detail-value">@Model.ApplicantName</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="detail-label">Mobile:</th>
+                                                    <td class="detail-value">@Model.Mobile</td>
+                                                </tr>
+                                                @if (!string.IsNullOrEmpty(Model.Email))
+                                                {
+                                                    <tr>
+                                                        <th class="detail-label">Email:</th>
+                                                        <td class="detail-value">@Model.Email</td>
+                                                    </tr>
+                                                }
+                                                @if (!string.IsNullOrEmpty(Model.Area))
+                                                {
+                                                    <tr>
+                                                        <th class="detail-label">Area:</th>
+                                                        <td class="detail-value">@Model.Area</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Section -->
+                        <div class="progress-section mt-5">
+                            <h6 class="text-center mb-3">Application Tracking Progress</h6>
+
+                            <!-- Bootstrap Progress Bar -->
+                            <div class="progress mb-3" style="height: 25px;">
+                                <div class="progress-bar @(isRejected ? "bg-danger" : isCompleted ? "bg-success" : "bg-info") progress-bar-striped @(isCompleted ? "" : "progress-bar-animated")"
+                                     role="progressbar"
+                                     style="width: @(progressPercentage)%;"
+                                     aria-valuenow="@progressPercentage"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                    @(progressPercentage)%
+                                </div>
+                            </div>
+
+                            <!-- Step Labels -->
+                            <div class="d-flex justify-content-between progress-labels">
+                                <small class="text-muted">
+                                    <i class="fas fa-circle @(progressPercentage >= 25 ? (isRejected ? "text-danger" : "text-success") : "text-muted")"></i>
+                                    Submitted
+                                </small>
+                                <small class="text-muted">
+                                    <i class="fas fa-circle @(progressPercentage >= 50 && !isRejected ? "text-info" : "text-muted")"></i>
+                                    Review
+                                </small>
+                                <small class="text-muted">
+                                    <i class="fas fa-circle @(progressPercentage >= 75 && !isRejected ? "text-info" : "text-muted")"></i>
+                                    Processing
+                                </small>
+                                <small class="text-muted">
+                                    <i class="fas fa-circle @(progressPercentage >= 100 && !isRejected ? "text-success" : "text-muted")"></i>
+                                    Complete
+                                </small>
+                            </div>
+
+                            @if (isRejected)
+                            {
+                                <div class="alert alert-danger mt-3" role="alert">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <strong>Application Rejected</strong> - अर्ज नाकारला गेला
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Remarks Section -->
+                        @if (!string.IsNullOrEmpty(Model.Remarks))
+                        {
+                            <div class="remarks-section mt-4">
+                                <div class="alert alert-info" role="alert">
+                                    <h6 class="alert-heading">
+                                        <i class="fas fa-sticky-note me-2"></i>Remarks / टिप्पणी
+                                    </h6>
+                                    <p class="mb-0">@Model.Remarks</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Card Footer - Action Buttons -->
+                    <div class="card-footer bg-light border-0 text-center py-3">
+                        <div class="d-flex flex-wrap justify-content-center gap-3">
+                            <a asp-action="Index" class="btn btn-primary btn-lg px-4">
+                                <i class="fas fa-search me-2"></i>Track Another App
+                            </a>
+                            <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="window.print()">
+                                <i class="fas fa-print me-2"></i>Print Status
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

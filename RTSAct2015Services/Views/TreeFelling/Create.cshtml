@@ -1,0 +1,662 @@
+﻿@{
+    ViewData["Title"] = "वृक्ष तोड - अर्ज";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="fas fa-tree me-2"></i>Application For Felling of Tree</h4>
+                    <small>झाड तोडण्यासाठी अर्ज</small>
+                </div>
+                <div class="card-body">
+                    <form id="treefelling_form" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Applicant Details -->
+                        <h5 class="mb-3 text-success"><i class="fas fa-user me-2"></i>Applicant Details (अर्जदाराचा तपशील)</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Title of Applicant (अर्जदाराचे शीर्षक) <span class="text-danger">*</span></label>
+                                <select name="Title" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Mr">Mr (श्री)</option>
+                                    <option value="Mrs">Mrs (सौ)</option>
+                                    <option value="Ms">Ms (कु)</option>
+                                    <option value="Dr">Dr (डॉ)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">First Name (पहिले नाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="FirstName" class="form-control" required maxlength="50">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Middle Name (मधले नाव)</label>
+                                <input type="text" name="MiddleName" class="form-control" maxlength="50">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Last Name (आडनाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="LastName" class="form-control" required maxlength="50">
+                            </div>
+                        </div>
+
+                        <!-- **CORRECTED: Address Section with proper field names** -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Plot/Flat No. (प्लॉट/फ्लॅट क्र.)</label>
+                                <input type="text" name="PlotFlatNo" class="form-control" maxlength="20">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Name of Building/Colony (इमारतीचे/वस्ती नाव)</label>
+                                <input type="text" name="BuildingColonyName" class="form-control" maxlength="100">
+                            </div>
+                            <div class="col-md-5">
+                                <!-- **FIXED: Changed from "StreetName" to "Street"** -->
+                                <label class="form-label">Name of Street (रस्त्याचे नाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="Street" class="form-control" required maxlength="100">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <!-- **FIXED: Changed from "AreaName" to "Area"** -->
+                                <label class="form-label">Name of Area (क्षेत्राचे नाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="Area" class="form-control" required maxlength="100">
+                            </div>
+                            <div class="col-md-4">
+                                <!-- **FIXED: Changed from "CityName" to "City"** -->
+                                <label class="form-label">Name of City (शहराचे नाव) <span class="text-danger">*</span></label>
+                                <input type="text" name="City" class="form-control" required maxlength="50">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Pin Code (पिन कोड) <span class="text-danger">*</span></label>
+                                <input type="text" name="PinCode" class="form-control" required maxlength="6" pattern="[1-9][0-9]{5}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <!-- **FIXED: Changed from "NearByLandmark" to "Landmark"** -->
+                                <label class="form-label">Near By Landmark (घराजवळची खूण) <span class="text-danger">*</span></label>
+                                <input type="text" name="Landmark" class="form-control" required maxlength="100">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">City Survey/Gut Number (सिटी सर्व्हे/गट नंबर)</label>
+                                <input type="text" name="CitySurveyGutNumber" class="form-control" maxlength="20">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Mobile No. (मोबाईल क्र.) <span class="text-danger">*</span></label>
+                                <input type="tel" name="Mobile" class="form-control" required maxlength="10" pattern="[6-9][0-9]{9}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Email (ईमेल)</label>
+                                <input type="email" name="Email" class="form-control" maxlength="80">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">No. of Tree Felling (वृक्षतोडीची संख्या) <span class="text-danger">*</span></label>
+                                <input type="number" name="NoOfTreeFelling" class="form-control" required min="1" max="100">
+                                <small class="form-text text-muted">Applicants Must Plant 1:10 Trees (अर्जदारांनी १:१० झाडे लावावीत)</small>
+                            </div>
+                        </div>
+
+                        <!-- **CORRECTED: Application Form Details** -->
+                        <h5 class="mb-3 text-success"><i class="fas fa-file-alt me-2"></i>Application Form Details</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Type of Applicant (अर्जदाराचा प्रकार) <span class="text-danger">*</span></label>
+                                <select name="TypeOfApplicant" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Citizen">Citizen (नागरिक)</option>
+                                    <option value="Builder">Builder (बिल्डर)</option>
+                                    <option value="Advertising Media">Advertising Media (जाहिरात माध्यम)</option>
+                                    <option value="Other">Other (इतर)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- **FIXED: Changed from "ReasonForCutting" to "ReasonForFelling"** -->
+                                <label class="form-label">Reason For Cutting (झाडे तोडण्याचे कारण) <span class="text-danger">*</span></label>
+                                <select name="ReasonForFelling" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Cutting Down Dangerous Trees">Cutting Down Dangerous Trees (धोकादायक झाडे तोडणे)</option>
+                                    <option value="Cutting Down Dried Up Trees">Cutting Down Dried Up Trees (वाळलेली झाडे तोडणे)</option>
+                                    <option value="Obstruction To Construction">Obstruction To Construction (बांधकामात अडथळा करणारे वृक्ष तोडणे)</option>
+                                    <option value="Obstruction To Hoardings">Obstruction To Hoardings (होर्डिंगला अडथळा)</option>
+                                    <option value="Other">Other (इतर)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- **FIXED: Changed from "TypeOfOwner" to "OwnerType"** -->
+                                <label class="form-label">Type of Owner (मालकाचा प्रकार) <span class="text-danger">*</span></label>
+                                <select name="OwnerType" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Private">Private (खाजगी)</option>
+                                    <option value="Corporation">Corporation (महामंडळ)</option>
+                                    <option value="Government">Government (सरकार)</option>
+                                    <option value="Semi Govt">Semi Govt (अर्ध शासकीय)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Type of Tree (झाडाचा प्रकार) <span class="text-danger">*</span></label>
+                                <select name="TreeType" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Fruit tree">Fruit tree (फळझाड)</option>
+                                    <option value="Other tree">Other tree (इतर झाड)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Other Reason (If selected Other above)</label>
+                                <input type="text" name="OtherReason" class="form-control" maxlength="200">
+                            </div>
+                        </div>
+
+                        <!-- Location Section with Map -->
+                        <h5 class="mb-3 text-success"><i class="fas fa-map-marker-alt me-2"></i>Tree Location (झाडाचे स्थान)</h5>
+                        <div class="mb-3">
+                            <div id="map" style="height: 300px; width: 100%; border-radius: 8px; border: 2px solid #28a745;"></div>
+                            <small class="form-text text-muted">Click on the map or drag the marker to set tree location</small>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-5">
+                                <label class="form-label">Latitude (अक्षांश) <span class="text-danger">*</span></label>
+                                <input type="number" id="Latitude" name="Latitude" step="any" class="form-control" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-label">Longitude (रेखांश) <span class="text-danger">*</span></label>
+                                <input type="number" id="Longitude" name="Longitude" step="any" class="form-control" required>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">&nbsp;</label>
+                                <button type="button" id="getLocationBtn" class="btn btn-outline-success form-control">
+                                    <i class="fas fa-location-arrow me-1"></i>Get Location
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Document Upload Section -->
+                        <h5 class="mb-3 text-success"><i class="fas fa-cloud-upload-alt me-2"></i>List Of Documents (कागदपत्रांची यादी)</h5>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Note:</strong> Upload Below Files Only pdf, .jpg, .jpeg, .bmp (Max upto 5 MB)
+                            <br><strong>टीप:</strong> खाली फक्त pdf, .jpg, .jpeg, .bmp इत्यादी फाइल अपलोड करा. कमाल ५ MB पर्यंत.
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">1. Current Year Property Tax Paid Receipt <span class="text-danger">*</span></label>
+                                <input type="file" name="PropertyTaxReceiptFile" class="form-control" accept=".pdf,.jpg,.jpeg,.bmp" required>
+                                <small class="text-muted">चालू वर्षाचा मालमत्ता कर भरलेली पावती</small>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">2. Photograph of Tree <span class="text-danger">*</span></label>
+                                <input type="file" name="TreePhotographFile" class="form-control" accept=".pdf,.jpg,.jpeg,.bmp" required>
+                                <small class="text-muted">झाडाचे छायाचित्र</small>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">3. Aadhaar Card <span class="text-danger">*</span></label>
+                                <input type="file" name="AadhaarCardFile" class="form-control" accept=".pdf,.jpg,.jpeg,.bmp" required>
+                                <small class="text-muted">आधार कार्ड</small>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label">4. Building Permission</label>
+                                <input type="file" name="BuildingPermissionFile" class="form-control" accept=".pdf,.jpg,.jpeg,.bmp">
+                                <small class="text-muted">बांधकाम परवानगी</small>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">5. Sanctioned Plan of Construction</label>
+                                <input type="file" name="SanctionedPlanFile" class="form-control" accept=".pdf,.jpg,.jpeg,.bmp">
+                                <small class="text-muted">बांधकामाचा मंजूर आराखडा</small>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">6. Form C & D</label>
+                                <input type="file" name="FormCDFile" class="form-control" accept=".pdf,.jpg,.jpeg,.bmp">
+                                <small class="text-muted">फॉर्म सी आणि डी</small>
+                            </div>
+                        </div>
+
+                        <!-- **COMPLETELY FIXED: Terms and Conditions Section** -->
+                        <h5 class="mb-3 text-success"><i class="fas fa-gavel me-2"></i>Terms And Conditions (नियम व अटी)</h5>
+                        <div class="card bg-light mb-4">
+                            <div class="card-body">
+                                <div class="form-check mb-2">
+                                    <!-- **FIXED: Use single checkbox without hidden field** -->
+                                    <input class="form-check-input terms-checkbox" type="checkbox" name="TermsCondition1" id="term1" value="true">
+                                    <label class="form-check-label" for="term1">
+                                        <small>In case of any kind of accident or damage to government or private property during felling/replanting of the said tree, the responsibility will be on the applicant.</small>
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input terms-checkbox" type="checkbox" name="TermsCondition2" id="term2" value="true">
+                                    <label class="form-check-label" for="term2">
+                                        <small>Tree felling action shall be completed within fifteen days from the date of permission.</small>
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input terms-checkbox" type="checkbox" name="TermsCondition3" id="term3" value="true">
+                                    <label class="form-check-label" for="term3">
+                                        <small>A total of 10 new plants shall be planted per tree at the rate of 1:10.</small>
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input terms-checkbox" type="checkbox" name="TermsCondition4" id="term4" value="true">
+                                    <label class="form-check-label" for="term4">
+                                        <small>Tree felling should not be done on Sundays and public holidays.</small>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="SelectAllTerms" id="selectAll" value="true">
+                                    <label class="form-check-label" for="selectAll">
+                                        <strong>Select All (सर्व निवडा)</strong>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-outline-success btn-lg w-100" onclick="window.print()">
+                                    <i class="fas fa-print me-2"></i>View and Print
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-success btn-lg w-100">
+                                    <i class="fas fa-paper-plane me-2"></i>Submit Application
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize Leaflet Map
+            var latInput = document.getElementById('Latitude');
+            var lngInput = document.getElementById('Longitude');
+            var defaultCenter = [19.8762, 75.3433]; // Chhatrapati Sambhajinagar coordinates
+
+            var map = L.map('map').setView(defaultCenter, 12);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            var marker = L.marker(defaultCenter, {
+                draggable: true,
+                title: 'Drag me to set tree location'
+            }).addTo(map);
+
+            function updateInputs(latlng) {
+                latInput.value = latlng.lat.toFixed(6);
+                lngInput.value = latlng.lng.toFixed(6);
+            }
+
+            // Update inputs when marker is dragged
+            marker.on('dragend', function(e) {
+                updateInputs(e.target.getLatLng());
+            });
+
+            // Update marker when map is clicked
+            map.on('click', function(e) {
+                marker.setLatLng(e.latlng);
+                updateInputs(e.latlng);
+            });
+
+            // Initialize inputs with default values
+            updateInputs(marker.getLatLng());
+
+            // Update marker when inputs are manually changed
+            function updateMarkerFromInputs() {
+                var lat = parseFloat(latInput.value);
+                var lng = parseFloat(lngInput.value);
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    var newLatLng = L.latLng(lat, lng);
+                    marker.setLatLng(newLatLng);
+                    map.panTo(newLatLng);
+                }
+            }
+
+            latInput.addEventListener('change', updateMarkerFromInputs);
+            lngInput.addEventListener('change', updateMarkerFromInputs);
+
+            // Get current location
+            $('#getLocationBtn').on('click', function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        var newLatLng = L.latLng(lat, lng);
+                        marker.setLatLng(newLatLng);
+                        map.setView(newLatLng, 15);
+                        updateInputs(newLatLng);
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Location Updated!',
+                            text: 'आपला वर्तमान स्थान सेट झाला आहे',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }, function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Location Error',
+                            text: 'स्थान मिळू शकले नाही. कृपया मॅपवर क्लिक करून सेट करा'
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Geolocation Not Supported',
+                        text: 'आपला ब्राउझर geolocation सापोर्ट करत नाही. कृपया मॅपवर क्लिक करून स्थान सेट करा'
+                    });
+                }
+            });
+
+            // File size and type validation
+            $('input[type="file"]').on('change', function() {
+                var file = this.files[0];
+                if (file) {
+                    var maxSize = 5 * 1024 * 1024; // 5MB
+                    if (file.size > maxSize) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'File Too Large',
+                            text: 'फाइल साइज ५MB पेक्षा कमी असावा'
+                        });
+                        $(this).val('');
+                        return false;
+                    }
+
+                    var allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'image/bmp'];
+                    if (!allowedTypes.includes(file.type)) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid File Type',
+                            text: 'कृपया फक्त PDF, JPG, JPEG, PNG किंवा BMP फाइल अपलोड करा'
+                        });
+                        $(this).val('');
+                        return false;
+                    }
+                }
+            });
+
+            // **UPDATED: Select All functionality**
+            $('#selectAll').on('change', function() {
+                var isChecked = $(this).is(':checked');
+                $('.terms-checkbox').prop('checked', isChecked);
+            });
+
+            // **COMPLETELY FIXED FORM SUBMISSION**
+            $('#treefelling_form').on('submit', function(e) {
+                e.preventDefault();
+
+                // Custom validation for required fields and terms
+                let isValid = true;
+                let errors = [];
+
+                // Check required text fields
+                const requiredFields = [
+                    { name: 'Title', message: 'Title is required' },
+                    { name: 'FirstName', message: 'First Name is required' },
+                    { name: 'LastName', message: 'Last Name is required' },
+                    { name: 'Mobile', message: 'Mobile is required' },
+                    { name: 'Street', message: 'Street is required' },
+                    { name: 'Area', message: 'Area is required' },
+                    { name: 'City', message: 'City is required' },
+                    { name: 'PinCode', message: 'Pin Code is required' },
+                    { name: 'Landmark', message: 'Landmark is required' },
+                    { name: 'ReasonForFelling', message: 'Reason for cutting is required' },
+                    { name: 'TreeType', message: 'Tree type is required' },
+                    { name: 'OwnerType', message: 'Owner type is required' },
+                    { name: 'TypeOfApplicant', message: 'Type of applicant is required' },
+                    { name: 'NoOfTreeFelling', message: 'Number of tree felling is required' }
+                ];
+
+                requiredFields.forEach(field => {
+                    const element = $(`[name="${field.name}"]`);
+                    const value = element.val();
+
+                    if (!value || (typeof value === 'string' && value.trim() === '')) {
+                        errors.push(field.message);
+                        isValid = false;
+                        element.addClass('is-invalid');
+                    } else {
+                        element.removeClass('is-invalid');
+                    }
+                });
+
+                // **FIXED: Check if all required terms are accepted**
+                const requiredTerms = ['#term1', '#term2', '#term3', '#term4'];
+                let allTermsAccepted = true;
+
+                requiredTerms.forEach(termId => {
+                    if (!$(termId).is(':checked')) {
+                        allTermsAccepted = false;
+                        $(termId).addClass('is-invalid');
+                    } else {
+                        $(termId).removeClass('is-invalid');
+                    }
+                });
+
+                if (!allTermsAccepted) {
+                    errors.push('All terms and conditions must be accepted');
+                    isValid = false;
+                }
+
+                // Validate mobile number
+                const mobile = $('input[name="Mobile"]').val();
+                if (mobile && !/^[6-9]\d{9}$/.test(mobile)) {
+                    errors.push('Mobile number must be 10 digits starting with 6-9');
+                    isValid = false;
+                }
+
+                // Validate pin code
+                const pinCode = $('input[name="PinCode"]').val();
+                if (pinCode && !/^[1-9]\d{5}$/.test(pinCode)) {
+                    errors.push('Pin code must be 6 digits not starting with 0');
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        html: '<ul class="text-left">' + errors.map(err => `<li>${err}</li>`).join('') + '</ul>',
+                        confirmButtonText: 'त्रुटी दुरुस्त करा'
+                    });
+                    return;
+                }
+
+                const form = this;
+                const submitBtn = $(form).find('button[type="submit"]');
+                const originalText = submitBtn.html();
+
+                // Show loading state
+                submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>सबमिट होत आहे...').prop('disabled', true);
+
+                // **COMPLETELY FIXED: Create FormData with proper checkbox handling**
+                const formData = new FormData();
+
+                // Add all regular form fields (input, select, textarea - but not checkboxes)
+                $(form).find('input:not([type="checkbox"]), select, textarea').each(function() {
+                    const $this = $(this);
+                    const name = $this.attr('name');
+                    const type = $this.attr('type');
+
+                    if (name && name !== '__RequestVerificationToken') {
+                        if (type === 'file') {
+                            // Handle file inputs
+                            const file = this.files[0];
+                            if (file) {
+                                formData.append(name, file);
+                            }
+                        } else {
+                            // Handle other input types
+                            formData.append(name, $this.val() || '');
+                        }
+                    }
+                });
+
+                // **FIXED: Handle checkboxes separately with proper true/false values**
+                formData.append('TermsCondition1', $('#term1').is(':checked') ? 'true' : 'false');
+                formData.append('TermsCondition2', $('#term2').is(':checked') ? 'true' : 'false');
+                formData.append('TermsCondition3', $('#term3').is(':checked') ? 'true' : 'false');
+                formData.append('TermsCondition4', $('#term4').is(':checked') ? 'true' : 'false');
+                formData.append('SelectAllTerms', $('#selectAll').is(':checked') ? 'true' : 'false');
+
+                // Add anti-forgery token
+                const token = $('input[name="__RequestVerificationToken"]').val();
+                if (token) {
+                    formData.append('__RequestVerificationToken', token);
+                }
+
+                // **DEBUG: Log FormData contents**
+                console.log('FormData contents:');
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+
+                // AJAX Request
+                $.ajax({
+                    url: '@Url.Action("Create", "TreeFelling")',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'अर्ज यशस्वीरित्या सबमिट झाला!',
+                                html: `
+                                    <div class="text-center">
+                                        <h5 class="text-success">${response.message}</h5>
+                                        <hr>
+                                        <p><strong>Application ID:</strong> <span class="text-primary">${response.data.applicationId}</span></p>
+                                        <p><small class="text-muted">कृपया हा आयडी भविष्यातील संदर्भासाठी सेव्ह करा</small></p>
+                                        <div class="alert alert-warning mt-3">
+                                            <small><strong>महत्वाचे:</strong> आपल्याला ${response.data.treesToPlant || 'अनेक'} झाडे लावावी लागतील (1:10 गुणोत्तर)</small>
+                                        </div>
+                                    </div>
+                                `,
+                                confirmButtonText: 'ठीक आहे',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Reset form
+                                    form.reset();
+                                    marker.setLatLng(defaultCenter);
+                                    map.setView(defaultCenter, 12);
+                                    updateInputs(marker.getLatLng());
+
+                                    // Optionally redirect
+                                    window.location.href = '@Url.Action("Index", "Home")';
+                                }
+                            });
+                        } else {
+                            let errorHtml = '<div class="text-left">';
+                            errorHtml += '<p class="mb-2"><strong>' + response.message + '</strong></p>';
+
+                            if (response.errors && response.errors.length > 0) {
+                                errorHtml += '<ul class="text-left">';
+                                response.errors.forEach(function(error) {
+                                    errorHtml += '<li>' + error + '</li>';
+                                });
+                                errorHtml += '</ul>';
+                            }
+                            errorHtml += '</div>';
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validation Error',
+                                html: errorHtml,
+                                confirmButtonText: 'त्रुटी दुरुस्त करा',
+                                width: '600px'
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', xhr.responseText);
+
+                        let errorMessage = 'सर्व्हर एरर आला आहे. कृपया पुन्हा प्रयत्न करा.';
+
+                        try {
+                            const errorResponse = JSON.parse(xhr.responseText);
+                            if (errorResponse.message) {
+                                errorMessage = errorResponse.message;
+                            }
+                        } catch (e) {
+                            // Use default error message if JSON parsing fails
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Server Error',
+                            text: errorMessage,
+                            confirmButtonText: 'ठीक आहे'
+                        });
+                    },
+                    complete: function() {
+                        // Restore button state
+                        submitBtn.html(originalText).prop('disabled', false);
+                    }
+                });
+            });
+
+            // Input validation helpers
+            $('input[pattern]').on('blur', function() {
+                const pattern = new RegExp($(this).attr('pattern'));
+                const value = $(this).val();
+
+                if (value && !pattern.test(value)) {
+                    $(this).addClass('is-invalid');
+                } else {
+                    $(this).removeClass('is-invalid');
+                }
+            });
+
+            // Phone number formatting
+            $('input[name="Mobile"]').on('input', function() {
+                var value = $(this).val().replace(/\D/g, '');
+                if (value.length <= 10) {
+                    $(this).val(value);
+                }
+            });
+
+            // Pin code formatting
+            $('input[name="PinCode"]').on('input', function() {
+                var value = $(this).val().replace(/\D/g, '');
+                if (value.length <= 6) {
+                    $(this).val(value);
+                }
+            });
+
+            // Clear validation styling on focus
+            $('input, select').on('focus', function() {
+                $(this).removeClass('is-invalid');
+            });
+        });
+    </script>
+}

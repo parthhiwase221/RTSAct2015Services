@@ -1,0 +1,146 @@
+﻿@model RTSAct2015Services.Models.DTOs.TrackApplicationDto
+
+@{
+    ViewData["Title"] = "Track Application - तक्रारीचा मागोवा";
+}
+
+<!-- Back Button -->
+<div class="back-button-container">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-light back-btn">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+</div>
+
+<div class="track-index-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+
+                <!-- Clean Header -->
+                <div class="track-index-header">
+                    <div class="header-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h2>Track Your Application</h2>
+                    <p class="subtitle">आपल्या तक्रारीचा मागोवा घ्या</p>
+                </div>
+
+                <!-- Search Form Card -->
+                <div class="search-form-card">
+                    <form asp-action="Index" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="All" class="alert alert-danger" role="alert" style="display: none;"></div>
+
+                        <!-- Complaint Number Field -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-hashtag me-2"></i>तक्रार क्रमांक / Complaint Number
+                            </label>
+                            <input asp-for="ComplaintNumber"
+                                   class="form-control search-input"
+                                   placeholder="उदा: GUT00001, OFC00001, RPF00001"
+                                   autocomplete="off" />
+                            <span asp-validation-for="ComplaintNumber" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Mobile Number Field -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-mobile-alt me-2"></i>मोबाइल नंबर / Mobile Number
+                                <span class="optional-text">(पर्यायी)</span>
+                            </label>
+                            <input asp-for="MobileNumber"
+                                   class="form-control search-input"
+                                   placeholder="10 अंकी मोबाइल नंबर"
+                                   maxlength="10" />
+                            <span asp-validation-for="MobileNumber" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-search">
+                                <i class="fas fa-search me-2"></i>Search Application
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary btn-clear" onclick="clearForm()">
+                                <i class="fas fa-refresh me-2"></i>Clear
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Information Cards -->
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="info-card">
+                            <div class="info-header">
+                                <i class="fas fa-list-alt"></i>
+                                <span>Application Types</span>
+                            </div>
+                            <div class="info-content">
+                                <div class="type-item">
+                                    <span class="type-badge gut">GUT</span>
+                                    <span class="type-text">गटार दुरुस्ती</span>
+                                </div>
+                                <div class="type-item">
+                                    <span class="type-badge ofc">OFC</span>
+                                    <span class="type-text">ऑप्टिकल फायबर</span>
+                                </div>
+                                <div class="type-item">
+                                    <span class="type-badge rpf">RPF</span>
+                                    <span class="type-text">रस्ता दुरुस्ती</span>
+                                </div>
+                                <div class="type-item">
+                                    <span class="type-badge tfl">TFL</span>
+                                    <span class="type-text">झाड तोडणे</span>
+                                </div>
+                                <div class="type-item">
+                                    <span class="type-badge ttr">TTR</span>
+                                    <span class="type-text">झाड छाटणे</span>
+                                </div>
+                                <div class="type-item">
+                                    <span class="type-badge dep">DEP</span>
+                                    <span class="type-text">ठेव परतावा</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="info-card">
+                            <div class="info-header">
+                                <i class="fas fa-clock"></i>
+                                <span>Status Types</span>
+                            </div>
+                            <div class="info-content">
+                                <div class="status-item">
+                                    <span class="status-dot submitted"></span>
+                                    <span class="status-text">Submitted - सबमिट केले</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-dot in-progress"></span>
+                                    <span class="status-text">In Progress - प्रक्रिया सुरू</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-dot under-review"></span>
+                                    <span class="status-text">Under Review - पुनरावलोकनाधीन</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-dot completed"></span>
+                                    <span class="status-text">Completed - पूर्ण</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-dot rejected"></span>
+                                    <span class="status-text">Rejected - नाकारले</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

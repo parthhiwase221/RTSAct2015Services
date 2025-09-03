@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-5">RTS ACT 2015 Services</h1>
+    <p class="lead">Online Citizen Services Portal</p>
+</div>
+
+<!-- Fixed 3 Column Layout -->
+<div class="container-fluid">
+    <div class="row row-cols-3 g-3">
+
+        <!-- Row 1: Cards 1-3 -->
+        <div class="col">
+            <div class="card h-100 service-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-tools fa-2x text-primary mb-2"></i>
+                    <h5 class="card-title">गटार झाकणे दुरुस्ती</h5>
+                    <p class="card-text small">Gutter Repair Complaint</p>
+                    <a href="@Url.Action("Create", "GatturComplaint")" class="btn btn-primary btn-sm">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 service-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-cut fa-2x text-success mb-2"></i>
+                    <h5 class="card-title">झाडाच्या फांद्या छाटणे</h5>
+                    <p class="card-text small">Tree Trimming Permission</p>
+                    <a href="@Url.Action("Create", "TreeTrimming")" class="btn btn-success btn-sm">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 service-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-network-wired fa-2x text-info mb-2"></i>
+                    <h5 class="card-title">भुयारी केबल परवानगी</h5>
+                    <p class="card-text small">Underground OFC Installation</p>
+                    <a href="@Url.Action("Create", "OFCPermission")" class="btn btn-info btn-sm">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2: Cards 4-6 -->
+        <div class="col">
+            <div class="card h-100 service-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-road fa-2x text-warning mb-2"></i>
+                    <h5 class="card-title">रस्त्यावरील खड्डे भरणे</h5>
+                    <p class="card-text small">Road Pothole Repair</p>
+                    <a href="@Url.Action("Create", "PotholeComplaint")" class="btn btn-warning btn-sm">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 service-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-tree fa-2x text-danger mb-2"></i>
+                    <h5 class="card-title">झाड तोडण्याकरिता अर्ज</h5>
+                    <p class="card-text small">Tree Felling Permission</p>
+                    <a href="@Url.Action("Create", "TreeFelling")" class="btn btn-danger btn-sm">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 service-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-money-bill-wave fa-2x text-secondary mb-2"></i>
+                    <h5 class="card-title">सिक्युरिटी डिपॉझिट परतावा</h5>
+                    <p class="card-text small">Security Deposit Refund</p>
+                    <a href="@Url.Action("Create", "DepositRefund")" class="btn btn-secondary btn-sm">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3: Cards 7-9 (Certificate Services) -->
+        <div class="col">
+            <div class="card h-100 service-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-baby fa-2x text-info mb-2"></i>
+                    <h5 class="card-title">जन्म प्रमाणपत्र</h5>
+                    <p class="card-text small">Birth Certificate</p>
+                    <a href="@Url.Action("Create", "BirthCertificate")" class="btn btn-info btn-sm">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 service-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-file-medical fa-2x text-secondary mb-2"></i>
+                    <h5 class="card-title">मृत्यू प्रमाणपत्र</h5>
+                    <p class="card-text small">Death Certificate</p>
+                    <a href="@Url.Action("Create", "DeathCertificate")" class="btn btn-secondary btn-sm">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 service-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-file-contract fa-2x text-primary mb-2"></i>
+                    <h5 class="card-title">लग्न प्रमाणपत्र</h5>
+                    <p class="card-text small">Marriage Certificate</p>
+                    <a href="@Url.Action("Create", "MarriageCertificate")" class="btn btn-primary btn-sm">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

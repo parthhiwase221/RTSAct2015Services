@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+	  <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
+	  <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\deposit-refund\general\" />
+    <Folder Include="wwwroot\uploads\deposit-refund\building-deposit-receipts\" />
+    <Folder Include="wwwroot\uploads\deposit-refund\building-permission-certs\" />
+    <Folder Include="wwwroot\uploads\deposit-refund\challans\" />
+    <Folder Include="wwwroot\uploads\deposit-refund\noc-letters\" />
+    <Folder Include="wwwroot\uploads\deposit-refund\property-tax-receipts\" />
+    <Folder Include="wwwroot\uploads\deposit-refund\tree-deposit-receipts\" />
+    <Folder Include="wwwroot\uploads\deposit-refund\occupancy-certificates\" />
+    <Folder Include="wwwroot\uploads\gattur-complaints\" />
+    <Folder Include="wwwroot\uploads\pothole-complaints\" />
+    <Folder Include="wwwroot\uploads\ofc-permission\general\" />
+    <Folder Include="wwwroot\uploads\ofc-permission\company-licenses\" />
+    <Folder Include="wwwroot\uploads\ofc-permission\noc-letters\" />
+    <Folder Include="wwwroot\uploads\ofc-permission\technical-drawings\" />
+    <Folder Include="wwwroot\uploads\ofc-permission\site-plans\" />
+    <Folder Include="wwwroot\uploads\tree-felling\general\" />
+    <Folder Include="wwwroot\uploads\tree-felling\aadhaar-cards\" />
+    <Folder Include="wwwroot\uploads\tree-felling\building-permissions\" />
+    <Folder Include="wwwroot\uploads\tree-felling\form-cd\" />
+    <Folder Include="wwwroot\uploads\tree-felling\sanctioned-plans\" />
+    <Folder Include="wwwroot\uploads\tree-felling\tree-photographs\" />
+    <Folder Include="wwwroot\uploads\tree-felling\property-tax-receipts\" />
+    <Folder Include="wwwroot\uploads\tree-trimming\general\" />
+    <Folder Include="wwwroot\uploads\tree-trimming\aadhaar-cards\" />
+    <Folder Include="wwwroot\uploads\tree-trimming\building-permissions\" />
+    <Folder Include="wwwroot\uploads\tree-trimming\noc-letters\" />
+    <Folder Include="wwwroot\uploads\tree-trimming\sanctioned-plans\" />
+    <Folder Include="wwwroot\uploads\tree-trimming\tree-photographs\" />
+    <Folder Include="wwwroot\uploads\tree-trimming\property-tax-receipts\" />
+  </ItemGroup>
+
+</Project>

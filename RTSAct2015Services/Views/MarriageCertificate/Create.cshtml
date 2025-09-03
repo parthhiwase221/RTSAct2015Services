@@ -1,0 +1,542 @@
+﻿@{
+    ViewData["Title"] = "लग्न प्रमाणपत्र - Marriage Certificate";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-file-contract me-2"></i>लग्न नोंदणी अर्ज (Form D)
+                        <small class="d-block">Marriage Registration Application Form</small>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form id="marriagecertificate_form">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Applicant Details -->
+                        <h5 class="mb-3 text-primary">
+                            <i class="fas fa-user me-2"></i>अर्जदाराचे तपशील (Applicant Details)
+                        </h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-2">
+                                <label class="form-label">
+                                    <span class="english">Title</span>
+                                    <span class="marathi">(शीर्षक)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="ApplicantTitle" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Mr">Mr (श्री)</option>
+                                    <option value="Mrs">Mrs (सौ)</option>
+                                    <option value="Ms">Ms (कु)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">First Name</span>
+                                    <span class="marathi">(पहिले नाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="ApplicantFirstName" class="form-control" required maxlength="40">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Middle Name</span>
+                                    <span class="marathi">(मधले नाव)</span>
+                                </label>
+                                <input type="text" name="ApplicantMiddleName" class="form-control" maxlength="40">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Last Name</span>
+                                    <span class="marathi">(आडनाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="ApplicantLastName" class="form-control" required maxlength="40">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Full Address</span>
+                                    <span class="marathi">(संपूर्ण पत्ता)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <textarea name="ApplicantAddress" class="form-control" required rows="2" maxlength="200"></textarea>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Mobile Number</span>
+                                    <span class="marathi">(मोबाईल नंबर)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="tel" name="Mobile" class="form-control" required maxlength="10" pattern="[6-9][0-9]{9}">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Email ID</span>
+                                    <span class="marathi">(ई-मेल आयडी)</span>
+                                </label>
+                                <input type="email" name="Email" class="form-control" maxlength="80">
+                            </div>
+                        </div>
+
+                        <!-- Application Details -->
+                        <h5 class="mb-3 text-primary">
+                            <i class="fas fa-clipboard-list me-2"></i>अर्जाचा तपशील (Application Details)
+                        </h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Zone</span>
+                                    <span class="marathi">(झोन)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="Zone" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="A1">A 1 Town Hall</option>
+                                    <option value="B5">B 5 Cidco N6</option>
+                                    <option value="C3">C 3 Central Naka</option>
+                                    <option value="D9">D 9 Krantichowk</option>
+                                    <option value="E6">E 6 Cidco N 6</option>
+                                    <option value="F7">F 7 Jawahar Colony</option>
+                                    <option value="G2">G 2 Mondha Naka</option>
+                                    <option value="H4">H 4 Saubhagya Mangalkaryalya</option>
+                                    <option value="I8">I 8 Satara Parisar</option>
+                                    <option value="J10">J 10</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Date of Marriage</span>
+                                    <span class="marathi">(विवाहाची तारीख)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="date" name="MarriageDate" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Personal Law</span>
+                                    <span class="marathi">(वैयक्तिक कायदा)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="PersonalLaw" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Hindu">Hindu (हिंदू)</option>
+                                    <option value="Buddhist">Buddhist (बौद्ध)</option>
+                                    <option value="Muslim">Muslim (मुस्लिम)</option>
+                                    <option value="Sikh">Sikh (शीख)</option>
+                                    <option value="Christian">Christian (ख्रिश्चन)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="form-label">
+                                    <span class="english">Place of Marriage (With full particulars)</span>
+                                    <span class="marathi">(विवाहाचे ठिकाण)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <textarea name="PlaceOfMarriage" class="form-control" required rows="2" maxlength="200"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Groom Details -->
+                        <h5 class="mb-3 text-primary">
+                            <i class="fas fa-male me-2"></i>वराचा तपशील (Groom's Details)
+                        </h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Name of Groom (Full Name)</span>
+                                    <span class="marathi">(वराचे संपूर्ण नाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="GroomName" class="form-control" required maxlength="100">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Alternate Name (If any)</span>
+                                    <span class="marathi">(पर्यायी नाव)</span>
+                                </label>
+                                <input type="text" name="GroomAlternateName" class="form-control" maxlength="100">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Religion by Birth</span>
+                                    <span class="marathi">(जन्माने धर्म)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="GroomReligionBirth" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Buddhist">Buddhist</option>
+                                    <option value="Muslim">Muslim</option>
+                                    <option value="Sikh">Sikh</option>
+                                    <option value="Christian">Christian</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Birth Date</span>
+                                    <span class="marathi">(जन्म तारीख)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="date" name="GroomBirthDate" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Age</span>
+                                    <span class="marathi">(वय)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="number" name="GroomAge" class="form-control" required min="21" max="100">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Marital Status</span>
+                                    <span class="marathi">(लग्नाच्या वेळी स्थिती)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="GroomMaritalStatus" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Unmarried">Unmarried (अविवाहित)</option>
+                                    <option value="Widower">Widower (विधुर)</option>
+                                    <option value="Divorced">Divorced (घटस्फोटित)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Occupation</span>
+                                    <span class="marathi">(व्यवसाय)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="GroomOccupation" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Service">Service</option>
+                                    <option value="Business">Business</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Full Address</span>
+                                    <span class="marathi">(वराचा पूर्ण पत्ता)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <textarea name="GroomAddress" class="form-control" required rows="2" maxlength="200"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Bride Details -->
+                        <h5 class="mb-3 text-primary">
+                            <i class="fas fa-female me-2"></i>वधूचा तपशील (Bride's Details)
+                        </h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Name of Bride (Full Name)</span>
+                                    <span class="marathi">(वधूचे संपूर्ण नाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="BrideName" class="form-control" required maxlength="100">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Alternate Name (If any)</span>
+                                    <span class="marathi">(पर्यायी नाव)</span>
+                                </label>
+                                <input type="text" name="BrideAlternateName" class="form-control" maxlength="100">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Religion by Birth</span>
+                                    <span class="marathi">(जन्माने धर्म)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="BrideReligionBirth" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Buddhist">Buddhist</option>
+                                    <option value="Muslim">Muslim</option>
+                                    <option value="Sikh">Sikh</option>
+                                    <option value="Christian">Christian</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Birth Date</span>
+                                    <span class="marathi">(जन्म तारीख)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="date" name="BrideBirthDate" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Age</span>
+                                    <span class="marathi">(वय)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="number" name="BrideAge" class="form-control" required min="18" max="100">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">
+                                    <span class="english">Marital Status</span>
+                                    <span class="marathi">(लग्नाच्या वेळी स्थिती)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="BrideMaritalStatus" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Unmarried">Unmarried (अविवाहित)</option>
+                                    <option value="Widow">Widow (विधवा)</option>
+                                    <option value="Divorced">Divorced (घटस्फोटित)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Occupation</span>
+                                    <span class="marathi">(व्यवसाय)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="BrideOccupation" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Service">Service</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Housewife">Housewife</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Full Address</span>
+                                    <span class="marathi">(वधूचा पूर्ण पत्ता)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <textarea name="BrideAddress" class="form-control" required rows="2" maxlength="200"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Priest Details -->
+                        <h5 class="mb-3 text-primary">
+                            <i class="fas fa-pray me-2"></i>पुरोहितांचा तपशील (Priest Details)
+                        </h5>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Name of Priest</span>
+                                    <span class="marathi">(पुरोहिताचे नाव)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="PriestName" class="form-control" required maxlength="100">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Religion</span>
+                                    <span class="marathi">(धर्म)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="PriestReligion" class="form-select" required>
+                                    <option value="">-Select-</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Buddhist">Buddhist</option>
+                                    <option value="Muslim">Muslim</option>
+                                    <option value="Sikh">Sikh</option>
+                                    <option value="Christian">Christian</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Age</span>
+                                    <span class="marathi">(वय)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="number" name="PriestAge" class="form-control" required min="21" max="100">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="form-label">
+                                    <span class="english">Full Address of Priest</span>
+                                    <span class="marathi">(पुरोहिताचा पूर्ण पत्ता)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <textarea name="PriestAddress" class="form-control" required rows="2" maxlength="200"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Document Upload -->
+                        <h5 class="mb-3 text-primary">
+                            <i class="fas fa-cloud-upload-alt me-2"></i>कागदपत्रे अपलोड (Document Upload)
+                        </h5>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Groom's Photo</span>
+                                    <span class="marathi">(वराचा फोटो)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="file" name="GroomPhoto" class="form-control" accept=".jpg,.jpeg,.png" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Bride's Photo</span>
+                                    <span class="marathi">(वधूचा फोटो)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="file" name="BridePhoto" class="form-control" accept=".jpg,.jpeg,.png" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">
+                                    <span class="english">Priest's Photo</span>
+                                    <span class="marathi">(पुरोहिताचा फोटो)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="file" name="PriestPhoto" class="form-control" accept=".jpg,.jpeg,.png" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Marriage Card</span>
+                                    <span class="marathi">(विवाह पत्रिका)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="file" name="MarriageCard" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    <span class="english">Group Photo at Marriage</span>
+                                    <span class="marathi">(लग्न समारंभाचा फोटो)</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="file" name="GroupPhoto" class="form-control" accept=".jpg,.jpeg,.png" required>
+                            </div>
+                        </div>
+
+                        <!-- Declaration -->
+                        <div class="alert alert-warning">
+                            <h6 class="alert-heading">
+                                <i class="fas fa-exclamation-triangle me-2"></i>घोषणा (Declaration)
+                            </h6>
+                            <p class="mb-0">
+                                <small>कोणत्याही व्यक्तीने ज्ञापनामध्ये केलेले कोणतेही विधान अथवा प्रतिज्ञापत्र जे विशेष महत्त्वाचे बाबतीत खोटे असेल अथवा केलेले कोणतेही दस्तऐवज खोटे असल्याचे त्याला/तिला माहीत असेल अथवा खोटे असल्याचे मानण्यास कारण असेल तर तो/ती व्यक्ती कलम १२ खाली दंडनीय कारवाईस पात्र ठरेल.</small>
+                            </p>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                अर्ज सबमिट करा (Submit Application)
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            console.log("Marriage Certificate Form loaded");
+
+            // Form submission
+            $('#marriagecertificate_form').on('submit', function(e) {
+                e.preventDefault();
+                const form = this;
+                const submitBtn = $(form).find('button[type="submit"]');
+                const originalText = submitBtn.html();
+
+                // Show loading
+                submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Submitting...').prop('disabled', true);
+
+                const formData = new FormData(form);
+
+                $.ajax({
+                    url: '@Url.Action("Create", "MarriageCertificate")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Application Submitted Successfully!',
+                                html: `
+                                    <div class="text-center">
+                                        <h5 class="text-success">${response.message}</h5>
+                                        <hr>
+                                        <p><strong>Application ID:</strong> <span class="text-primary">${response.data.applicationId}</span></p>
+                                        <small class="text-muted">कृपया भविष्यातील संदर्भासाठी हा ID जतन करा</small>
+                                    </div>
+                                `,
+                                confirmButtonText: 'Continue',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = '@Url.Action("Index", "Home")';
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validation Error',
+                                text: response.message || 'कृपया आपला इनपुट तपासा आणि पुन्हा प्रयत्न करा.',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', xhr.responseText);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Server Error',
+                            text: 'अर्ज सबमिट करताना त्रुटी झाली. कृपया नंतर पुन्हा प्रयत्न करा.',
+                            confirmButtonText: 'OK'
+                        });
+                    },
+                    complete: function() {
+                        submitBtn.html(originalText).prop('disabled', false);
+                    }
+                });
+            });
+
+            // Input validation
+            $('input[pattern]').on('blur', function() {
+                const pattern = new RegExp($(this).attr('pattern'));
+                const value = $(this).val();
+                if (value && !pattern.test(value)) {
+                    $(this).addClass('is-invalid');
+                } else {
+                    $(this).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+}
